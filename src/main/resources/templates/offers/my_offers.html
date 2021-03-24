@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="ISO-8859-1">
+    <title>List Offers</title>
+    <link rel="stylesheet" type="text/css" href="/webjars/bootstrap/css/bootstrap.min.css" />
+</head>
+<body>
+<div class="container text-center">
+    <div>
+        <form th:action="@{/logout}" method="post">
+            <h1>
+                Signed in as <b>[[${#request.userPrincipal.principal.getFullName}]]</b>
+            </h1>
+            <input type="submit" value="Sign Out" />
+        </form>
+        <h3><a href="/new_offer">New Offer</a></h3>
+        <h3><a href="/new_bid">New Bid</a></h3>
+        <h3><a href="/my_bids">My Bids</a></h3>
+    </div>
+    <div>
+        <h1><b>[[${#request.userPrincipal.principal.getFullName}]]</b>'s Offers:</h1>
+    </div>
+
+    <div>
+        <table class="table table-striped table-bordered">
+            <thead class="thead-dark">
+            <tr>
+                <th>Bid Id</th>
+                <th>Item Name</th>
+                <th>Bid Price</th>
+                <th>Matched</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="offer: ${offers}">
+                <td th:text="${offer.id}">Bid ID</td>
+                <td th:text="${offer.item.name}">Item Name</td>
+                <td th:text="${offer.price}">Price</td>
+                <td th:text="${offer.matched}">Matched</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+</body>
+</html>
